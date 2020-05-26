@@ -46,7 +46,7 @@ order *,sequential  //make sure variables are in order.
 	
 	replace c_earlybreast = 0 if m4 != .    //  based on Last born children who were ever breastfed
 	replace c_earlybreast = 1 if inlist(m34,0,100)
-	replace c_earlybreast = . if inlist(m34,199,299)
+	replace c_earlybreast = . if inlist(m34,199,299,.)
 	
     *c_skin2skin: child placed on mother's bare skin immediately after birth of births in last 2 years
 	capture confirm variable m77
@@ -57,7 +57,7 @@ order *,sequential  //make sure variables are in order.
 	
 	*c_sba: Skilled birth attendance of births in last 2 years: go to report to verify how "skilled is defined"
 	gen c_sba = . 
-	replace c_sba = 1 if sba_skill>=1 
+	replace c_sba = 1 if sba_skill>=1 & sba_skill!=.
 	replace c_sba = 0 if sba_skill==0 
 	  
 	*c_sba_q: child placed on mother's bare skin and breastfeeding initiated immediately after birth among children with sba of births in last 2 years
